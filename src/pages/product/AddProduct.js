@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
   const [fetchedCategories, setFetchedCategories] = useState([]);
@@ -11,6 +11,7 @@ const AddProduct = () => {
     name: "",
     price: 0,
     url: "",
+    weight: 0,
     description: "",
     categories: [],
   });
@@ -77,7 +78,7 @@ const AddProduct = () => {
         }
       })
       .then(() => {
-        toast.success("'Add Product' successful!")
+        toast.success("'Add Product' successful!");
         // alert("Add Product successfully added");
         window.location.href = "/";
       })
@@ -93,15 +94,13 @@ const AddProduct = () => {
     >
       <Navbar />
       <div className="form-container">
-        <ToastContainer/>
+        <ToastContainer />
         {isAuthorized ? (
-          <div className="form" >
+          <div className="form">
             <h1>Add New Product </h1>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>
-                  Name:
-                </label>
+                <label>Name:</label>
                 <input
                   className="form-control"
                   name="name"
@@ -112,9 +111,7 @@ const AddProduct = () => {
               </div>
 
               <div className="form-group">
-                <label>
-                  Price:
-                </label>
+                <label>Price:</label>
                 <input
                   className="form-control"
                   name="price"
@@ -136,9 +133,18 @@ const AddProduct = () => {
               </div>
 
               <div className="form-group">
-                <label >
-                  Description:
-                </label>
+                <label>Weight:</label>
+                <input
+                  className="form-control"
+                  name="weight"
+                  type="number"
+                  value={newProduct.weight}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Description:</label>
                 <textarea
                   className="form-control"
                   name="description"
@@ -149,9 +155,7 @@ const AddProduct = () => {
               </div>
 
               <div className="form-group">
-                <label>
-                  Categories:
-                </label>
+                <label>Categories:</label>
 
                 {fetchedCategories.map((category, index) => (
                   <div key={"key" + index}>

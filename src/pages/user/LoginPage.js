@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import "../../App.css";
 import Footer from "../../components/Footer";
-import {toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +27,7 @@ const Login = () => {
 
         if (!response.ok) {
           if (response.status === 401 || response.status === 403) {
-            setError("Invalid credentials");
+            toast.error("Invalid credentials");
           } else {
             throw new Error(response.statusText || "An error occurred");
           }
@@ -40,7 +40,7 @@ const Login = () => {
         console.log("Login successful");
         window.location.href = "/"; // Redirect to homepage
       } catch (error) {
-        setError(error.message);
+        toast.error(error.message);
       }
     } else if (type === "github") {
       // Handle GitHub OAuth login
@@ -58,25 +58,18 @@ const Login = () => {
   return (
     <div className="index-container" style={{ overflow: "hidden" }}>
       <Navbar />
-      <div className="form-container" style={{minHeight: "444px"}}>
-        <ToastContainer/>
+      <div className="form-container" style={{ minHeight: "444px" }}>
+        <ToastContainer />
         <div className="form">
           <div className="form-header">
             <h1>Login</h1>
             <img
-                src={require("../../assets/logo.png")}
-                width={100}
-                alt="logo"
-                style={{marginLeft: "1rem"}}
+              src={require("../../assets/logo.png")}
+              width={100}
+              alt="logo"
+              style={{ marginLeft: "1rem" }}
             />
           </div>
-          {error && (
-            <p>
-              {/*<div role="alert">*/}
-                {toast.error(error)}
-              {/*</div>*/}
-            </p>
-          )}
           <form
             onSubmit={(e) => {
               handleLogin(e, "form");

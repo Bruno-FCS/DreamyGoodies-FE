@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CartIcon from "../assets/cart.png";
+import { toast, ToastContainer } from "react-toastify";
 
 const WishList = () => {
   const [wishList, setWishList] = useState([]);
@@ -38,7 +39,7 @@ const WishList = () => {
         ? product.name.slice(0, 25) + "..."
         : product.name;
 
-    alert(`${pr_name} was added to the cart!`);
+    toast.success(`${pr_name} was added to the cart!`);
   };
 
   const handleDeleteItem = (selectedProduct) => {
@@ -54,6 +55,7 @@ const WishList = () => {
     <div>
       <Navbar />
       <div className="container table-section" style={{ minHeight: "524px" }}>
+        <ToastContainer />
         <h1 className="table-title" style={{ margin: "20px 0" }}>
           Wishlist
         </h1>

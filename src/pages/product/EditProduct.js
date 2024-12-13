@@ -11,6 +11,7 @@ const EditProduct = () => {
     name: "",
     price: 0,
     url: "",
+    weight: 0,
     description: "",
     categories: [],
   });
@@ -47,6 +48,7 @@ const EditProduct = () => {
           name: data.name,
           price: data.price,
           url: data.url,
+          weight: data.weight,
           description: data.description,
           categories: data.categories,
         });
@@ -96,6 +98,7 @@ const EditProduct = () => {
       name: updatedProduct.name,
       price: updatedProduct.price,
       url: updatedProduct.url,
+      weight: updatedProduct.weight,
       description: updatedProduct.description,
       categories: updatedProduct.categories,
     };
@@ -117,7 +120,7 @@ const EditProduct = () => {
         }
       })
       .then(() => {
-        alert("Product successfully updated");
+        //alert("Product successfully updated");
         window.location.href = "/";
       })
       .catch((error) => console.error("Error updating product:", error));
@@ -179,6 +182,17 @@ const EditProduct = () => {
               </div>
 
               <div className="form-group">
+                <label>Weight: </label>
+                <input
+                  className="form-control"
+                  name="weight"
+                  type="number"
+                  value={updatedProduct.weight}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="form-group">
                 <label>Description: </label>
                 <textarea
                   className="form-control"
@@ -210,7 +224,6 @@ const EditProduct = () => {
               </div>
 
               <button
-
                 type="submit"
                 style={{
                   backgroundColor: "#ff9f9f",
